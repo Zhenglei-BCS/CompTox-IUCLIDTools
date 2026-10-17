@@ -13,7 +13,7 @@ EZ Mapper is a proof-of-concept, work-in-progress application built with Streaml
 - Generate and download i6z files of IUCLID formatted data
 
 ### Installation
-- Ensure you are using python 3.8.
+- Use Python 3.12 (the version used by the Dockerfile and the pinned `requirements.txt`).
 - Install the required dependencies:
    ```bash
    pip install -r requirements.txt
@@ -37,3 +37,30 @@ Project Structure
  - test_files: Contains some example test files and also a vignette which has a walkthrough for the test data.
  - All OHTs Word Files -Nov 2021: Directory containing Word files for OHT templates.
  - entity_models: Contains formatting files for each OHT to assist with i6z generation and field options. These are broken into each individual entity.
+ - iuclid_engine: Streamlit-free conversion engine (mapping, picklist resolution, i6z writing, validation, run reports) used by both the app and the command line.
+ - pipeline_config: Example version-controlled configuration for batch runs (mappings, code lists, link registry, classification table, format settings).
+ - docs/bayer-adoption.md: How to run the engine in an internal data flow, and the decisions that are still open.
+
+### Batch conversion without the web app
+
+The conversion engine can be used without Streamlit, from the command line or from Python. It only needs `requirements-engine.txt`:
+
+```bash
+pip install -r requirements-engine.txt
+
+# input table + saved mapping JSON (+ code lists) -> .i6z, run report and audit log entry
+python -m iuclid_engine convert \
+    --input test_files/oht67test.csv \
+    --mapping pipeline_config/mappings/toxval/oht67_repeated_dose_oral.json \
+    --output output/oht67test.i6z
+```
+
+- The mapping can be a flat mapping downloaded from the app (`test_files/column_mapping.json`) or a managed mapping with metadata (`mapping_id`, `version`, `template`, `codelists`, `required_fields`, `constants`).
+- Picklist values may be given as IUCLID phrase codes, IUCLID phrase labels (e.g. `rat`) or source terms translated by a code list. Values that cannot be resolved are written with the IUCLID "other:" code when the field allows it and are otherwise rejected and listed in the report.
+- Each run writes `<output>.report.json` (records, unmapped columns, rejected values, missing required fields, schema errors, input/mapping/output checksums) and appends to `audit_log.jsonl` in the output directory. The exit code is 2 when errors are found; with `--strict` no `.i6z` is written in that case.
+- `--links` reuses existing IUCLID substance/legal entity documents instead of creating new ones, `--parent-substance-key` attaches all records to one existing substance, and `--xsd-dir` validates every document against the IUCLID format XSDs.
+- Other commands: `python -m iuclid_engine classify` (assign templates from a study-type/guideline code table, see `pipeline_config/classification/`), `templates` (list templates) and `fields --template <Template>` (list mappable fields).
+
+Engine tests: `pip install pytest && python -m pytest tests`.
+
+An engine-only container image is available with `docker build --target engine -t iuclid-engine .`. The machine suggestions can be run with `python main.py --input <file>`.

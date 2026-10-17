@@ -7,8 +7,7 @@
 ---
 
 ## 2. Setup and Installation
-1. Make sure you are using **python version 3.8** (the app was built using 3.8.8). Later versions are not compatible with certain libraries that are
-necessary for the machine suggestion functionality.
+1. Make sure you are using **python version 3.12**, the version used by the Dockerfile and the pinned `requirements.txt`.
 2. **Ensure dependencies are installed** by running:
    ```bash
    pip install -r requirements.txt

@@ -5,7 +5,11 @@ Created on Mon Jul 22 12:53:30 2024
 @author: VASKO
 """
 
+import argparse
+import json
 import os
+
+import pandas as pd
 
 from configs.config import config
 from src.load_normalizers import load_normalizers
@@ -33,7 +37,16 @@ def makedir(dirname):
         print(f"Warning: {dirname} already exists")
 
 
-def main(config, user_df):
+def load_input(input_file):
+    if str(input_file).lower().endswith('.csv'):
+        return pd.read_csv(input_file)
+    return pd.read_excel(input_file)
+
+
+def main(config, user_df=None):
+    if user_df is None:
+        user_df = load_input(config['input_file'])
+
     # load config params
     update_ohts = config['update_ohts']
     update_input = config['update_input']
@@ -222,4 +235,8 @@ def main(config, user_df):
 
 
 if __name__ == '__main__':
-    main(config)
+    parser = argparse.ArgumentParser(description="Run the machine field suggestions on an input table.")
+    parser.add_argument("--input", default=config['input_file'],
+                        help="CSV or XLSX to analyse (default: config['input_file'])")
+    args = parser.parse_args()
+    print(json.dumps(main(config, load_input(args.input)), indent=2))
