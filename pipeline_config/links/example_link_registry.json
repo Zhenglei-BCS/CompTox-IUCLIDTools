@@ -1,0 +1,12 @@
+{
+    "Substance": {
+        "key": "Substance.chemical_name",
+        "documents": {
+            "Example active substance": "00000000-0000-0000-0000-000000000000/00000000-0000-0000-0000-000000000000"
+        }
+    },
+    "LegalEntity": {
+        "key": "LegalEntity.general_info.legal_entity_name",
+        "documents": {}
+    }
+}

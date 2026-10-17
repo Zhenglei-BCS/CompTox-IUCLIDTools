@@ -1,0 +1,22 @@
+{
+    "mapping_id": "toxval_oht67_repeated_dose_oral",
+    "version": "1.0.0",
+    "source_system": "EPA ToxValDB (example; replace with the Bayer source system)",
+    "template": "RepeatedDoseToxicityOral",
+    "description": "Example managed mapping built from test_files/column_mapping.json for test_files/oht67test.csv.",
+    "reviewed_by": "",
+    "reviewed_on": "",
+    "columns": {
+        "exposure_route_original": "ENDPOINT_STUDY_RECORD.RepeatedDoseToxicityOral.materials_and_methods.administration_exposure.route_of_administration.value",
+        "species_original": "ENDPOINT_STUDY_RECORD.RepeatedDoseToxicityOral.materials_and_methods.test_animals.species.value",
+        "strain_original": "ENDPOINT_STUDY_RECORD.RepeatedDoseToxicityOral.materials_and_methods.test_animals.strain.value",
+        "sex_original": "ENDPOINT_STUDY_RECORD.RepeatedDoseToxicityOral.materials_and_methods.test_animals.sex.value"
+    },
+    "constants": {},
+    "required_fields": [
+        "ENDPOINT_STUDY_RECORD.RepeatedDoseToxicityOral.materials_and_methods.test_animals.species.value"
+    ],
+    "codelists": [
+        "../../codelists/example_source_vocabulary.json"
+    ]
+}

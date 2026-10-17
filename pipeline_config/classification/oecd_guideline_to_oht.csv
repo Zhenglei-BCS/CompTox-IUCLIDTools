@@ -1,0 +1,81 @@
+# Example: OECD test guideline -> OHT label (format used by the Streamlit app, "OHT <n>: <Name>").
+# Replace or extend with Bayer study-type codes; every row must be reviewed before production use.
+code,oht_class,note
+OECD 401,OHT 60: Acute Toxicity Oral,acute oral toxicity (deleted TG)
+OECD 420,OHT 60: Acute Toxicity Oral,fixed dose procedure
+OECD 423,OHT 60: Acute Toxicity Oral,acute toxic class method
+OECD 425,OHT 60: Acute Toxicity Oral,up-and-down procedure
+OECD 403,OHT 61: Acute Toxicity Inhalation,
+OECD 433,OHT 61: Acute Toxicity Inhalation,
+OECD 436,OHT 61: Acute Toxicity Inhalation,
+OECD 402,OHT 62: Acute Toxicity Dermal,
+OECD 404,OHT 64: Skin Irritation Corrosion,
+OECD 431,OHT 64: Skin Irritation Corrosion,in vitro corrosion
+OECD 439,OHT 64: Skin Irritation Corrosion,in vitro irritation
+OECD 405,OHT 65: Eye Irritation,
+OECD 437,OHT 65: Eye Irritation,BCOP
+OECD 492,OHT 65: Eye Irritation,RhCE
+OECD 406,OHT 66-1: Skin Sensitisation,
+OECD 429,OHT 66-1: Skin Sensitisation,LLNA
+OECD 442C,OHT 66-1: Skin Sensitisation,DPRA
+OECD 442D,OHT 66-1: Skin Sensitisation,KeratinoSens
+OECD 442E,OHT 66-1: Skin Sensitisation,h-CLAT
+OECD 407,OHT 67: Repeated Dose Toxicity Oral,28-day oral
+OECD 408,OHT 67: Repeated Dose Toxicity Oral,90-day oral rodent
+OECD 409,OHT 67: Repeated Dose Toxicity Oral,90-day oral non-rodent
+OECD 452,OHT 67: Repeated Dose Toxicity Oral,chronic toxicity
+OECD 412,OHT 68: Repeated Dose Toxicity Inhalation,
+OECD 413,OHT 68: Repeated Dose Toxicity Inhalation,
+OECD 410,OHT 69-1: Repeated Dose Toxicity Dermal,
+OECD 411,OHT 69-1: Repeated Dose Toxicity Dermal,
+OECD 471,OHT 70: Genetic Toxicity Vitro,Ames
+OECD 473,OHT 70: Genetic Toxicity Vitro,chromosome aberration in vitro
+OECD 476,OHT 70: Genetic Toxicity Vitro,HPRT
+OECD 487,OHT 70: Genetic Toxicity Vitro,micronucleus in vitro
+OECD 490,OHT 70: Genetic Toxicity Vitro,TK
+OECD 474,OHT 71: Genetic Toxicity Vivo,micronucleus in vivo
+OECD 475,OHT 71: Genetic Toxicity Vivo,chromosome aberration in vivo
+OECD 489,OHT 71: Genetic Toxicity Vivo,comet
+OECD 451,OHT 72: Carcinogenicity,
+OECD 416,OHT 73: Toxicity Reproduction,two-generation
+OECD 443,OHT 73: Toxicity Reproduction,EOGRTS
+OECD 414,OHT 74: Developmental Toxicity Teratogenicity,
+OECD 424,OHT 76: Neurotoxicity,
+OECD 203,OHT 41: Short Term Tox To Fisch,fish acute
+OECD 210,OHT 42: Long Term Tox To Fish,fish early life stage
+OECD 215,OHT 42: Long Term Tox To Fish,fish juvenile growth
+OECD 202,OHT 43: Short Term Toxicity To Aqua Inv,Daphnia acute
+OECD 211,OHT 44: Long Term Toxicity To Aqua Inv,Daphnia reproduction
+OECD 201,OHT 45: Toxicity To Aquatic Algae,
+OECD 221,OHT 46: Toxicity To Aquatic Plant,Lemna
+OECD 209,OHT 47: Toxicity To Microorganisms,activated sludge respiration
+OECD 218,OHT 49: Sediment Toxicity,
+OECD 219,OHT 49: Sediment Toxicity,
+OECD 222,OHT 50-1: Toxicity To Soil Macroorganisms Except Arthropods,earthworm reproduction
+OECD 207,OHT 50-1: Toxicity To Soil Macroorganisms Except Arthropods,earthworm acute
+OECD 213,OHT 50-2: Toxicity To Terrestrial Arthropods,honeybee acute oral
+OECD 214,OHT 50-2: Toxicity To Terrestrial Arthropods,honeybee acute contact
+OECD 245,OHT 50-2: Toxicity To Terrestrial Arthropods,honeybee chronic oral
+OECD 237,OHT 50-2: Toxicity To Terrestrial Arthropods,honeybee larval
+OECD 208,OHT 51: Toxicity To Terrestrial Plants,seedling emergence
+OECD 227,OHT 51: Toxicity To Terrestrial Plants,vegetative vigour
+OECD 216,OHT 52: Toxicity To Soil Microorganisms,nitrogen transformation
+OECD 205,OHT 53: Toxicity To Birds,avian dietary
+OECD 206,OHT 53: Toxicity To Birds,avian reproduction
+OECD 223,OHT 53: Toxicity To Birds,avian acute oral
+OECD 111,OHT 25: Hydrolysis,
+OECD 301,OHT 28: Biodegradation In Water Screening Tests,
+OECD 308,OHT 29: Biodegradation In Water And Sediment Simulation Tests,
+OECD 307,OHT 30: Biodegradation Insoil,
+OECD 305,OHT 32: Bioaccumulation Aquatic Sediment,
+OECD 106,OHT 34: Adsorption Desorption,
+OECD 417,OHT 58: Basic Toxicokinetics,
+OECD 427,OHT 59: Dermal Absorption,
+OECD 428,OHT 59: Dermal Absorption,
+OECD 501,OHT 85-3: Metabolism In Crops,
+OECD 503,OHT 85-2: Metabolism In Livestock,
+OECD 502,OHT 85-5: Residues In Rotational Crops,
+OECD 505,OHT 85-4: Residues In Livestock,
+OECD 506,OHT 85-10: Stability Of Residues In Stored Commod,
+OECD 507,OHT 85-8: Nature Residues In Processed Commod,
+OECD 508,OHT 85-9: Magnitude Resid In Processed Comm,

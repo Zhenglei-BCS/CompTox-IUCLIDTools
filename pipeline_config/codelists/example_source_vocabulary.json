@@ -1,0 +1,32 @@
+{
+    "name": "example_source_vocabulary",
+    "version": "1.0.0",
+    "description": "Example translation of source-system terms to IUCLID phrase labels (or phrase codes). Keys under 'fields' are the IUCLID path without '.value', its last segment (e.g. 'species'), or '*' for all picklists. Terms are matched case-insensitively. Replace with reviewed Bayer vocabulary.",
+    "other_code": "1342",
+    "fields": {
+        "species": {
+            "Rattus norvegicus": "rat",
+            "Mus musculus": "mouse",
+            "Canis lupus familiaris": "dog",
+            "Oryctolagus cuniculus": "rabbit"
+        },
+        "strain": {
+            "SD": "Sprague-Dawley",
+            "F344": "Fischer 344",
+            "Han Wistar": "Wistar"
+        },
+        "sex": {
+            "M": "male",
+            "F": "female",
+            "M/F": "male/female",
+            "both": "male/female"
+        },
+        "route_of_administration": {
+            "gavage": "oral: gavage",
+            "diet": "oral: feed",
+            "dietary": "oral: feed",
+            "drinking water": "oral: drinking water",
+            "capsule": "oral: capsule"
+        }
+    }
+}

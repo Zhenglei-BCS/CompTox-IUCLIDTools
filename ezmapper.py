@@ -289,7 +289,7 @@ if st.session_state.split_done and selected_df_key != "None":
         # Extract the OHT number from the selected key
         oht_parts = selected_df_key.split(":")
         oht_number = oht_parts[0].strip()
-        oht_type = oht_parts[1].strip().replace(" ", "") if len(oht_parts) > 1 else oht_number
+        oht_type = template_from_oht_label(selected_df_key)
 
         # Construct the path to the specific OHT directory
         oht_excel_dir_path = oht_excel_base_path / oht_number
@@ -350,60 +350,17 @@ if st.session_state.split_done and selected_df_key != "None":
         st.title("Export i6z File")
         generate_i6z_button = st.button("Generate i6z File", icon=":material/download:")
         if generate_i6z_button:
-            #st.write('generating')
-            main_uuid = str(uuid.uuid4())
-            parent_uuid = str(uuid.uuid4())
             try:
-                column_mapping_dict = column_mapping
                 data = apply_column_mapping(column_mapping, st.session_state.modified_df)
-                test_material_columns = get_test_material_columns(column_mapping_dict)
-                #tm_data = data[[col for col in data.columns if col in test_material_columns]]
-                if test_material_columns:
-                    test_material_instances, test_material_uuid_map = create_test_material_instances(data,
-                                                                                                 test_material_columns,
-                                                                                                 main_uuid)
-                else:
-                    test_material_instances, test_material_uuid_map = None, None
-                #data = data.drop(columns=[col for col in test_material_columns if col in data.columns])
-                legal_entity_columns = get_legal_entity_columns(column_mapping_dict)
-                #le_data = data[[col for col in data.columns if col in legal_entity_columns]]
-                if legal_entity_columns:
-                    legal_entity_instances, legal_entity_uuid_map = create_legal_entity_instances(data,
-                                                                                              legal_entity_columns,
-                                                                                              main_uuid)
-                else:
-                    legal_entity_instances, legal_entity_uuid_map = None, None
-                #data = data.drop(columns=[col for col in legal_entity_columns if col in data.columns])
-
-                ref_sub_columns = get_ref_sub_columns(column_mapping_dict)
-
-                #ref_data = data[[col for col in data.columns if col in ref_sub_columns]]
-                if ref_sub_columns:
-                    ref_sub_instances, ref_sub_uuid_map = create_ref_sub_instances(data, ref_sub_columns, main_uuid)
-                else:
-                    ref_sub_instances, ref_sub_uuid_map = None, None
-                #data = data.drop(columns=[col for col in ref_sub_columns if col in data.columns])
-
-                substance_columns = get_substance_columns(column_mapping_dict)
-                #sub_data = data[[col for col in data.columns if col in substance_columns]]
-                if substance_columns:
-                    substance_instances, substance_uuid_map = create_substance_instances(data, substance_columns, ref_sub_uuid_map, 
-                                                                                         ref_sub_columns, main_uuid)
-                else:
-                    substance_instances, substance_uuid_map = None, None
-                #data = data.drop(columns=[col for col in substance_columns if col in data.columns])
-                #st.write('prestuff')
-
-                oht_instances = map_csv_to_oht_instances(data, test_material_uuid_map, test_material_columns,
-                                                         substance_uuid_map, substance_columns, main_uuid)
-
-                generate_i6z(oht_instances, test_material_instances, legal_entity_instances, ref_sub_instances,
-                             substance_instances, data, uploaded_other_files, 
-                             main_uuid=main_uuid, parent_uuid=parent_uuid)
+                result = generate_i6z(data, uploaded_other_files)
+                rejected = [issue.to_dict() for issue in result.issues if issue.severity == "error"]
+                if rejected:
+                    st.warning(f"{len(rejected)} value(s) were rejected and left empty in the i6z file.")
+                    st.dataframe(pd.DataFrame(rejected), hide_index=True)
 
                 if st.session_state['i6z_io_buffer'] is not None:
                     st.write("Successfully Generated")
-                    outfile_name = parent_uuid + '.i6z'
+                    outfile_name = result.main_uuid + '.i6z'
                     st.download_button(
                         label='Download i6z File',
                         data=st.session_state['i6z_io_buffer'].getvalue(),
@@ -412,4 +369,3 @@ if st.session_state.split_done and selected_df_key != "None":
                     )
             except Exception as e:
                 st.error(f"Error generating: {e}")
-
